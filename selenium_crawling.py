@@ -2,9 +2,9 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
-def instagram_login():
-    usr_email = "mgkim1994@naver.com"
-    usr_password = "kpy680126"
+def sns_login(email, password):
+    usr_email = email
+    usr_password = password
 
     path = "/usr/local/bin/chromedriver"
     driver = webdriver.Chrome(path)
