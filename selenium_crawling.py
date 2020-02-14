@@ -34,8 +34,6 @@ def instagram_login(email, password):
 
 
 def twitter_login(email, password):
-    usr_email = email
-    usr_password = password
 
     path = "/usr/local/bin/chromedriver"
     driver = webdriver.Chrome(path)
@@ -48,11 +46,12 @@ def twitter_login(email, password):
          """//*[@id="react-root"]/div/div/div/main/div/div/div/div[1]/div/a[2]/div""")))
     login_elem.click()
 
-    emei = driver.find_element_by_name("session[username_or_email]")
-    emei.send_keys(usr_email)
+    emei = wait.until(EC.element_to_be_clickable(
+        (By.NAME, "session[username_or_email]")))
+    emei.send_keys(email)
 
     emei = driver.find_element_by_name("session[password]")
-    emei.send_keys(usr_password)
+    emei.send_keys(password)
     emei.send_keys(Keys.RETURN)
 
     return driver
