@@ -59,21 +59,6 @@ def twitter_login(email, password):
     return driver
 
 
-def twitter_after_new_url_login(email, password):
-
-    path = "/usr/local/bin/chromedriver"
-    driver = webdriver.Chrome(path)
-
-    wait = WebDriverWait(driver, 10)
-
-    emei = wait.until(EC.element_to_be_clickable(
-        (By.NAME, "session[username_or_email]")))
-    emei.send_keys(email)
-
-    emei = driver.find_element_by_name("session[password]")
-    emei.send_keys(password)
-
-
 def save_and_load_cookie(driver, change_url):
     pickle.dump(driver.get_cookies(), open("login_live.pkl", "wb"))
 
