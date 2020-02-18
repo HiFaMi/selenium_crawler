@@ -2,6 +2,10 @@ import os
 import json
 import time
 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 from selenium_crawling import twitter_login, save_and_load_cookie, download_twitter_image
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -42,27 +46,33 @@ change_to_media = driver.find_element_by_css_selector(
     "nav > div.css-1dbjc4n.r-18u37iz.r-16y2uox.r-1wbh5a2.r-tzz3ar.r-1pi2tsx.r-hbs49y > div:nth-child(3) > a")
 change_to_media.click()
 
-time.sleep(2)
+# wait = WebDriverWait(driver, 10)
+# find_imgs = wait.until(EC._find_elements(
+#     (By.CSS_SELECTOR, "div > img")))
+
+
+time.sleep(3)
 find_imgs = driver.find_elements_by_css_selector("div > img")
 download_twitter_image(imgs_element=find_imgs)
 
-# # set loading time
-# SCROLL_PAUSE_TIME = 2
-#
-# # Get scroll height
-# last_height = driver.execute_script("return document.body.scrollHeight")
-#
-# while True:
-#     # Scroll down to bottom
-#     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-#
-#     # Wait to load page
-#     time.sleep(SCROLL_PAUSE_TIME)
-#
-#     download_twitter_image(imgs_element=find_imgs)
-#
-#     # Calculate new scroll height and compare with last scroll height
-#     new_height = driver.execute_script("return document.body.scrollHeight")
-#     if new_height == last_height:
-#         break
-#     last_height = new_height
+# set loading time
+SCROLL_PAUSE_TIME = 4
+
+# Get scroll height
+last_height = driver.execute_script("return document.body.scrollHeight")
+
+while True:
+    # Scroll down to bottom
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+    # Wait to load page
+    time.sleep(SCROLL_PAUSE_TIME)
+
+    find_imgs = driver.find_elements_by_css_selector("div > img")
+    download_twitter_image(imgs_element=find_imgs)
+
+    # Calculate new scroll height and compare with last scroll height
+    new_height = driver.execute_script("return document.body.scrollHeight")
+    if new_height == last_height:
+        break
+    last_height = new_height
