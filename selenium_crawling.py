@@ -1,10 +1,16 @@
 import pickle
+import os.path
+import ssl
+import urllib.request
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+
+from urllib.parse import urlparse
+
 
 
 def instagram_login(email, password):
@@ -70,3 +76,13 @@ def save_and_load_cookie(driver, change_url):
         driver.add_cookie(cookie)
 
 
+def download_twitter_image(imgs_element):
+    ssl._create_default_https_context = ssl._create_unverified_context
+
+    for find_img in imgs_element:
+        src = find_img.get_attribute('src')
+        url = urlparse(src)
+        path_list = url.path.split("/")
+        print(path_list)
+        if path_list[1] == "media" and os.path.exists("img/" + path_list[2] + ".png") is False:
+            urllib.request.urlretrieve(src, "img/" + path_list[2] + ".png")
