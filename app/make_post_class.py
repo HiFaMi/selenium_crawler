@@ -2,7 +2,7 @@ import os
 import django
 django.setup()
 
-from app.pictures.models import PostPicture
+from pictures.models import PostPicture
 
 PRESENT_DIR = os.path.abspath('')
 IMG_DIR = os.path.join(PRESENT_DIR, '.media/img')
@@ -16,7 +16,7 @@ for dir_list in dir_lists:
         img_lists = os.listdir(os.path.join(IMG_DIR, dir_list))
         new_img_counter = 0
         for img_list in img_lists:
-            if PostPicture.objects.filter(post_picture='img/{}/{}'.format(class_user_name, img_list)) is not True:
+            if PostPicture.objects.filter(post_picture='img/{}/{}'.format(class_user_name, img_list)) is False:
                 post = PostPicture.objects.create(
                     post_user=class_user_name,
                     post_picture='img/{}/{}'.format(class_user_name, img_list)
@@ -25,5 +25,8 @@ for dir_list in dir_lists:
 
                 new_img_counter += 1
 
-        print("new img about {}: -{}".format(dir_list, new_img_counter))
+        if new_img_counter == 0:
+            print("nothing new img about {}".format(dir_list))
+        else:
+            print("new img about {}: +{}".format(dir_list, new_img_counter))
 print("Done")
