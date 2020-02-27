@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block content %}
+{#        <div class="col-md-6 col-lg-4">#}
+{#            <div class="portfolio-item mx-auto">#}
+{#                <img class="img-fluid" src="{% static 'img/portfolio/cabin.png'%}" alt="">#}
+{#            </div>#}
+{#        </div>#}
+
     {% for post in posts %}
-        <div>
-            <img src="{{ post.post_picture.url }}" alt="" align="center">
-        </div>
+
+        <img class="img-thumbnail" src="{{ post.post_picture.url }}" alt="" width="150px">
+
     {% endfor %}
 {% endblock %}
