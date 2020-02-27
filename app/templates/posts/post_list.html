@@ -13,8 +13,8 @@
 
     {% endfor %}
 
-    <div class="pagination">
-    <span class="step-links">
+    <div class="pagination container" style="display: flex; justify-content: center;">
+    <span class="step-links lead">
         {% if posts.has_previous %}
             <a href="?page={{ posts.previous_page_number }}">previous</a>
         {% endif %}
