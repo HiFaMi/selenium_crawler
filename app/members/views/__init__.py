@@ -1,4 +1,1 @@
-from django.shortcuts import render
-
-def signup(request):
-    
+from .auth import *
