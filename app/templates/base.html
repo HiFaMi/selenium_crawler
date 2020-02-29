@@ -28,15 +28,18 @@
         <a class="navbar-brand js-scroll-trigger" href="#page-top">Top</a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item mx-0 mx-lg-1">
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#">Logout</a>
+                </li>
+                {% else %}
                 <li class="nav-item mx-0 mx-lg-1">
                     <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#">Sign in</a>
                 </li>
                 <li class="nav-item mx-0 mx-lg-1">
                     <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#">Sign up</a>
                 </li>
-                <li class="nav-item mx-0 mx-lg-1">
-                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#">Logout</a>
-                </li>
+                {% endif %}
             </ul>
         </div>
     </div>
