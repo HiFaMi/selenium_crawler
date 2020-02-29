@@ -48,6 +48,8 @@ AUTHENTICATION_BACKEND = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+LOGIN_URL = 'members:login'
+
 # Application definition
 
 INSTALLED_APPS = [
