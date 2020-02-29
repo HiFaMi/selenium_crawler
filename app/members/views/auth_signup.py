@@ -2,7 +2,7 @@ from django.contrib.auth import login
 from django.shortcuts import render, redirect
 
 from members.models.auth import User
-from ..forms import UserForm
+from ..forms.signup import UserForm
 
 
 def signup(request):
