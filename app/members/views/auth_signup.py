@@ -18,7 +18,7 @@ def signup(request):
                 password=forms.cleaned_data['password']
             )
             login(request, new_user)
-            return redirect('post-list')
+            return redirect('posts:post-list')
 
     else:
         forms = UserForm()

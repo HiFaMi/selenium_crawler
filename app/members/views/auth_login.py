@@ -13,7 +13,7 @@ def user_login(request):
 
         if user is not None:
             login(request, user)
-            return redirect('post-list')
+            return redirect('posts:post-list')
         else:
             return redirect('members:login')
 

@@ -4,4 +4,4 @@ from django.shortcuts import redirect
 
 def user_logout(request):
     logout(request)
-    return redirect('post-list')
+    return redirect('posts:post-list')
