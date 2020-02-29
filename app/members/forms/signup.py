@@ -8,7 +8,7 @@ class UserForm(forms.ModelForm):
 
     password_check = forms.CharField(
         widget=forms.TextInput(
-            attrs={'placeholder': 'Password Check'},
+            attrs={'placeholder': 'Password Check', 'type': 'password'},
         ),
     )
 
@@ -22,9 +22,9 @@ class UserForm(forms.ModelForm):
         )
 
         widgets = {
-            'username': forms.TextInput(attrs={'placeholder': 'ID'}),
-            'user_email': forms.TextInput(attrs={'placeholder': 'Email'}),
-            'password': forms.TextInput(attrs={'placeholder': 'Password'}),
+            'username': forms.TextInput(attrs={'placeholder': 'ID', 'type': 'text'}),
+            'user_email': forms.TextInput(attrs={'placeholder': 'Email', 'type': 'email'}),
+            'password': forms.TextInput(attrs={'placeholder': 'Password', 'type': 'password'}),
         }
 
     def clean_username(self):
