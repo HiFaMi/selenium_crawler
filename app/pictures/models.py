@@ -11,5 +11,6 @@ class PostPicture(models.Model):
     def __str__(self):
         return self.post_modal_target
 
-    def total_likes(self):
+    @property
+    def like_count(self):
         return self.post_likes.count()
