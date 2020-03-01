@@ -16,11 +16,15 @@ for dir_list in dir_lists:
         img_lists = os.listdir(os.path.join(IMG_DIR, dir_list))
         new_img_counter = 0
         for img_list in img_lists:
-            if PostPicture.objects.filter(post_picture='img/{}/{}'.format(class_user_name, img_list)) is False:
+            if PostPicture.objects.filter(post_picture='img/{}/{}'.format(class_user_name, img_list)).exists() is False:
                 post = PostPicture.objects.create(
                     post_user=class_user_name,
                     post_picture='img/{}/{}'.format(class_user_name, img_list)
                 )
+                post.save()
+
+                post = PostPicture.objects.last()
+                post.post_modal_target = "PostModalTarget{}".format(post.id)
                 post.save()
 
                 new_img_counter += 1
