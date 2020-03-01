@@ -22,7 +22,7 @@
                             {% for form in forms %}
                                 <div class="control-group">
                                     <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                                        <label for="{{ form.label_for_id }}">{{ form.name }}</label>
+                                        <label for="{{ form.label_for_id }}"></label>
                                         <input class="form-control" id="{{ form.id_for_label }}" type="{{ form.field.widget.input_type }}" placeholder="{{ form.field.widget.attrs.placeholder }}" name="{{ form.name }}" required="required" data-validation-required-message="Please enter your name.">
                                         <p class="help-block text-danger"></p>
                                     </div>
