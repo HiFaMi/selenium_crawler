@@ -32,15 +32,12 @@ def post_like_ajax(request):
 
     if post.post_likes.all().filter(pk=user.id):
         post.post_likes.remove(user)
-        message = "좋아요 취소"
 
     else:
         post.post_likes.add(user)
-        message = "좋아요"
 
     context = {
         'like_count': post.like_count,
-        'message': message,
     }
 
     return HttpResponse(json.dumps(context), content_type="application/json")
