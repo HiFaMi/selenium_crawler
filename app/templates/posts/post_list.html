@@ -39,15 +39,12 @@
         </div>
     </section>
     {% for post in posts %}
+
         <div class="portfolio-modal modal fade" id="{{ post.post_modal_target }}" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
-                    <!--  post like  -->
-                    <li>
-{#                        <input type="button" class="like" name="{{ post.id }}" value="Like">#}
-                        <p id="count-{{ post.id }}">{{ post.like_count }}개</p>
-                    </li>
-                    <a name="{{ post.id }}" class="like" href="#">좋아요</a>
+
+
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">
             <i class="fas fa-times"></i>
@@ -70,7 +67,14 @@
                                     <!-- Portfolio Modal - Image -->
                                     <img class="img-fluid rounded mb-5" src="{{ post.post_picture.url }}" alt="">
                                     <!-- Portfolio Modal - Text -->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <div class="divider-custom-icon">
+                                        {% if request.user in post.post_likes.all %}
+                                            <a class="fas fa-heart fa-2x like" style="color: Tomato" name="{{ post.id }}"></a>
+                                        {% else %}
+                                            <a class="far fa-heart fa-2x like" style="color: Tomato" name="{{ post.id }}"></a>
+                                        {% endif %}
+                                        <p id="count-{{ post.id }}">좋아요 {{ post.like_count }}개</p>
+                                    </div>
                                     <button class="btn btn-primary" href="#" data-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
@@ -96,8 +100,7 @@
                 // 서버측에서 전송한 Response 데이터 형식 (json)
                 // {'likes_count': post.like_count, 'message': message }
                 success: function(response){ // 통신 성공시 - 동적으로 좋아요 갯수 변경, 유저 목록 변경
-                    alert(response.message);
-                    $("#count-"+pk).html(response.like_count+"개");
+                    $("#count-"+pk).html("좋아요 "+response.like_count+"개");
 
                 },
                 error: function(request, status, error){ // 통신 실패시 - 로그인 페이지 리다이렉트
@@ -107,5 +110,10 @@
                 },
             });
         })
+    </script>
+    <script>
+        $(".fa-heart").click(function () {
+            $(this).toggleClass("far fas");
+        });
     </script>
 {% endblock %}
