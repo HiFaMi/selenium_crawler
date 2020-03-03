@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <section class="page-section portfolio" id="portfolio">
+        <div class="container user-container">
+            <h3 class="page-section-heading text-center text-uppercase text-secondary mb-0">Profile</h3>
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon">
+                    <i class="far fa-address-card"></i>
+                </div>
+                <div class="divider-custom-line"></div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+
+
+                    <div class="col-lg-8 mx-auto">
+
+
+                        <div class="control-group">
+
+                            <div class="form-group controls mb-0 pb-4" >
+                                <div class="row" style="flex-wrap: nowrap;">
+                                    <div class="form-control text-center" style="width: 20%; font-size: 1.5rem;">Name</div>
+                                    <div class="form-control text-center" style="font-size: 1.5rem;">{{ user.username }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="form-group controls mb-0 pb-4" >
+                                <div class="row" style="flex-wrap: nowrap;">
+                                    <div class="form-control" style="width: 20%; text-align: center; font-size: 1.5rem;">Email</div>
+                                    <div class="form-control" style="text-align: center; font-size: 1.5rem;">{{ user.user_email }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Change password</h2>
+                        <div class="divider-custom">
+                            <div class="divider-custom-line"></div>
+                            <div class="divider-custom-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="divider-custom-line"></div>
+                        </div>
+
+                        <form method="post" >
+                            {% csrf_token %}
+                            {% for form in forms %}
+                                <div class="control-group">
+                                    <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                        <label for="{{ form.label_for_id }}"></label>
+                                        <input class="form-control" id="{{ form.id_for_label }}" type="{{ form.field.widget.input_type }}" placeholder="{{ form.field.widget.attrs.placeholder }}" name="{{ form.name }}" required="required" data-validation-required-message="Please enter your name.">
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <br>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-xl btn-toolbar input-group" id="sendMessageButton" style="justify-content: center;">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+{% endblock %}
