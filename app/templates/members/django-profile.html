@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <section class="page-section portfolio" id="portfolio">
+        <div class="container user-container">
+            <h3 class="page-section-heading text-center text-uppercase text-secondary mb-0">Profile</h3>
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon">
+                    <i class="far fa-address-card"></i>
+                </div>
+                <div class="divider-custom-line"></div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+
+
+                    <div class="col-lg-8 mx-auto">
+
+
+                        <div class="control-group">
+
+                            <div class="form-group controls mb-0 pb-4" >
+                                <div class="row" style="flex-wrap: nowrap;">
+                                    <div class="form-control text-center" style="width: 20%; font-size: 1.5rem;">Name</div>
+                                    <div class="form-control text-center" style="font-size: 1.5rem;">{{ user.username }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="form-group controls mb-0 pb-4" >
+                                <div class="row" style="flex-wrap: nowrap;">
+                                    <div class="form-control" style="width: 20%; text-align: center; font-size: 1.5rem;">Email</div>
+                                    <div class="form-control" style="text-align: center; font-size: 1.5rem;">{{ user.user_email }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Change password</h2>
+                        <div class="divider-custom">
+                            <div class="divider-custom-line"></div>
+                            <div class="divider-custom-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="divider-custom-line"></div>
+                        </div>
+
+                        <form method="post" >
+                            {% csrf_token %}
+
+                            <div class="control-group">
+                                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                    <label for="id_for_password"></label>
+                                    <input class="form-control" id="id_old_password" type="password" placeholder="기존 비밀번호"  required="required" autofocus="autofocus">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                    <label for="id_new_password1"></label>
+                                    <input class="form-control" id="id_new_password1" type="password" placeholder="새 비밀번호" autofocus="autofocus" required="required">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                    <label for="id_new_password2"></label>
+                                    <input class="form-control" id="id_new_password2" type="password" placeholder="새 비밀번호(확인)" autofocus="autofocus" required="required">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+
+                            <div class="text-danger text-center">
+
+                                {% for error_message in forms.error_messages.values %}
+
+                                    <span>{{ error_message }}<br></span>
+                                {% endfor %}
+
+                            </div>
+
+                            <div class="text-danger text-center">
+                                {{ forms.new_password1.help_text }}
+                            </div>
+
+                            <br>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-xl btn-toolbar input-group" id="sendMessageButton" style="justify-content: center;">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+{% endblock %}
+
