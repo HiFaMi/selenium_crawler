@@ -11,7 +11,7 @@
                 </div>
                 <div class="divider-custom-line"></div>
             </div>
-            <div class="row">
+            <div class="row" style="justify-content: normal">
 
 
                 {% for post in posts %}
@@ -33,6 +33,7 @@
                     {% if posts.has_next %}
                         <a href="?page={{ posts.next_page_number }}">next</a>
                     {% endif %}
+                    {{ posts.end_page_number }}
                 </span>
                 </div>
             </div>
@@ -88,7 +89,6 @@
         </div>
     {% endfor %}
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
         $(".like").click(function(){
             var pk = $(this).attr('name')
