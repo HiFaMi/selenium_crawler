@@ -36,19 +36,15 @@
                             menu
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item " href="{% url 'members:profile' %}">Profile</a>
+                            <a class="dropdown-item" href="{% url 'members:user-like' %}">Likes Post</a>
                         </div>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'members:profile' %}">Profile</a>
                     </li>
 
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'members:logout' %}">Logout</a>
                     </li>
+
                 {% else %}
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'members:login' %}">Sign in</a>
