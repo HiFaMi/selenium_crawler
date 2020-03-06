@@ -31,48 +31,54 @@ search_box = driver.find_element_by_xpath(
 # 검색
 search_box.send_keys("#박보영")
 
-element = driver.find_element_by_css_selector(
-    "div > div.css-1dbjc4n:nth-child(3) > div.r-my5ep6.r-rull8r.r-qklmqi.r-6dt33c.r-o7ynqc.r-1j63xyz.css-18t94o4.css-1dbjc4n > div"
+elements = driver.find_elements_by_css_selector(
+    "div.css-1dbjc4n.r-1awozwy.r-1iusvr4.r-18u37iz.r-46vdb2.r-1wtj0ep.r-5f2r5o.r-bcqeeo > div > div.css-901oao.css-bfa6kz.r-1re7ezh.r-18u37iz.r-1qd0xha.r-a023e6.r-16dba41.r-ad9z0x.r-bcqeeo.r-qvutc0 > span"
 )
 
-element_list = element.text.split('@')
-change_url = "https://twitter.com/" + str(element_list[-1])
+top_three_list = []
 
-# cookie save and load
-save_and_load_cookie(driver=driver, change_url=change_url)
+for i in range(3):
+    element_list = elements[i].text.split('@')
+    top_three_list.append(element_list[-1])
 
-driver.refresh()
-change_to_media = driver.find_element_by_css_selector(
-    "nav > div.css-1dbjc4n.r-18u37iz.r-16y2uox.r-1wbh5a2.r-tzz3ar.r-1pi2tsx.r-hbs49y > div:nth-child(3) > a")
-change_to_media.click()
+for sns in top_three_list:
+    change_url = "https://twitter.com/" + str(sns)
+    print(change_url)
+    # cookie save and load
+    save_and_load_cookie(driver=driver, change_url=change_url)
+
+    driver.refresh()
+    change_to_media = driver.find_element_by_css_selector(
+        "nav > div.css-1dbjc4n.r-18u37iz.r-16y2uox.r-1wbh5a2.r-tzz3ar.r-1pi2tsx.r-hbs49y > div:nth-child(3) > a")
+    change_to_media.click()
 
 # wait = WebDriverWait(driver, 10)
 # find_imgs = wait.until(EC._find_elements(
 #     (By.CSS_SELECTOR, "div > img")))
 
-
-time.sleep(3)
-find_imgs = driver.find_elements_by_css_selector("div > img")
-download_twitter_image(imgs_element=find_imgs)
-
-# set loading time
-SCROLL_PAUSE_TIME = 4
-
-# Get scroll height
-last_height = driver.execute_script("return document.body.scrollHeight")
-
-while True:
-    # Scroll down to bottom
-    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-
-    # Wait to load page
-    time.sleep(SCROLL_PAUSE_TIME)
-
+    time.sleep(3)
     find_imgs = driver.find_elements_by_css_selector("div > img")
-    download_twitter_image(imgs_element=find_imgs)
+    download_twitter_image(imgs_element=find_imgs, user_name=sns)
 
-    # Calculate new scroll height and compare with last scroll height
-    new_height = driver.execute_script("return document.body.scrollHeight")
-    if new_height == last_height:
-        break
-    last_height = new_height
+    # set loading time
+    SCROLL_PAUSE_TIME = 4
+
+    # Get scroll height
+    last_height = driver.execute_script("return document.body.scrollHeight")
+
+    while True:
+        # Scroll down to bottom
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+        # Wait to load page
+        time.sleep(SCROLL_PAUSE_TIME)
+
+        find_imgs = driver.find_elements_by_css_selector("div > img")
+        download_twitter_image(imgs_element=find_imgs, user_name=sns)
+
+        # Calculate new scroll height and compare with last scroll height
+        new_height = driver.execute_script("return document.body.scrollHeight")
+        if new_height == last_height:
+            print("{} is done".format(sns))
+            break
+        last_height = new_height
