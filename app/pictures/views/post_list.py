@@ -5,7 +5,7 @@ from ..models import PostPicture
 
 
 def post_list(request):
-    posts_list = PostPicture.objects.all()
+    posts_list = PostPicture.objects.all().order_by('-pk')
 
     # show 21 contacts per page
     paginator = Paginator(posts_list, 21)
