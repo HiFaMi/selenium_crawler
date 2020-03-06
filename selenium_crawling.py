@@ -12,7 +12,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from urllib.parse import urlparse
 
 
-
 def instagram_login(email, password):
     usr_email = email
     usr_password = password
@@ -76,13 +75,17 @@ def save_and_load_cookie(driver, change_url):
         driver.add_cookie(cookie)
 
 
-def download_twitter_image(imgs_element):
+def download_twitter_image(imgs_element, user_name):
     ssl._create_default_https_context = ssl._create_unverified_context
 
     for find_img in imgs_element:
         src = find_img.get_attribute('src')
         url = urlparse(src)
         path_list = url.path.split("/")
-        print(path_list)
-        if path_list[1] == "media" and os.path.exists("img/" + path_list[2] + ".png") is False:
-            urllib.request.urlretrieve(src, "img/" + path_list[2] + ".png")
+        dir_path = 'app/.media/img/{}/'.format(user_name)
+
+        if os.path.exists(dir_path) is False:
+            os.mkdir(dir_path)
+
+        if path_list[1] == "media" and os.path.exists(dir_path + path_list[2] + ".png") is False:
+            urllib.request.urlretrieve(src, dir_path + path_list[2] + ".png")
