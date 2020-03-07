@@ -62,6 +62,8 @@ INSTALLED_APPS = [
 
     'members.apps.MembersConfig',
     'pictures.apps.PicturesConfig',
+
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
