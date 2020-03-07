@@ -10,6 +10,7 @@ django = "<3"
 selenium = "^3.141.0"
 beautifulsoup4 = "^4.8.2"
 pillow = "^7.0.0"
+djangorestframework = "^3.11.0"
 [tool.poetry.dev-dependencies]
 django-extensions = "^2.2.8"
 jupyter = "^1.0.0"
