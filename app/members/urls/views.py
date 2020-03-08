@@ -1,9 +1,9 @@
 from django.urls import path
 
-from .views.profile import user_profile, django_profile, user_like
-from .views.auth_logout import user_logout
-from .views.auth_login import user_login
-from .views.auth_signup import signup
+from ..views.profile import user_profile, django_profile, user_like
+from ..views.auth_logout import user_logout
+from ..views.auth_login import user_login
+from ..views.auth_signup import signup
 
 app_name = 'members'
 urlpatterns = [
