@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import post_list, post_like, post_like_ajax
+from ..views import post_list, post_like, post_like_ajax
 
 app_name = 'posts'
 urlpatterns = [
