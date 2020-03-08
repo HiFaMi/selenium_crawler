@@ -21,9 +21,19 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('members/', include('members.urls')),
-    path('posts/', include('pictures.urls')),
+
+    # normal views
+    path('members/', include('members.urls.views')),
+    path('posts/', include('pictures.urls.views')),
+
+
+    # api view
+    path('members-api/', include('members.urls.api')),
+    path('posts-api/', include('pictures.urls.api')),
+
+    # bootstrap index
     path('', TemplateView.as_view(template_name='index.html')),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
