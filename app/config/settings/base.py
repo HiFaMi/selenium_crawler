@@ -72,6 +72,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 100,
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        # token authentication시에 추가해줘야 함
+        'rest_framework.authentication.TokenAuthentication',
+
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
