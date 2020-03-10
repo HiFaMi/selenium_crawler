@@ -34,5 +34,3 @@ class UserAuthSerializer(AuthTokenSerializer):
             raise serializers.ValidationError("not authenticated user")
 
         return user
-
-
