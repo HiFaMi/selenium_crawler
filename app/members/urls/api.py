@@ -1,5 +1,6 @@
 from django.urls import path
 
+from ..api.change_password import ChangePassword
 from ..api.delete import AuthDelete
 from ..api.logout import AuthLogout
 from ..api.profile import AuthProfile, AuthProfileGeneric
@@ -22,5 +23,6 @@ urlpatterns = [
 
     path('delete/', AuthDelete.as_view(), name='api-delete'),
 
+    path('change_password/', ChangePassword.as_view(), name='api-change-password'),
 
 ]
