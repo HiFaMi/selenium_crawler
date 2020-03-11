@@ -1,0 +1,35 @@
+FROM    crawler:base
+
+
+COPY    .       /srv/project/
+
+ENV     BUILD_MODE      dev
+
+ENV     DJANGO_SETTINGS_MODUL=config.settings.${BUILD_MODE}
+
+
+WORKDIR /srv/project
+
+RUN     pip3 install -r requirements.txt
+
+RUN     mkdir /var/log/gunicorn
+RUN     mkdir /srv/project/.log
+
+
+# nginx config
+
+RUN     cp -f       /srv/project/.config/dev/nginx.conf \
+                    /etc/nginx/nginx.conf &&\
+        rm -rf      /etc/nginx/sites-available/* &&\
+        rm -rf      /etc/nginx/sites-enabled/*  &&\
+        cp -a       /srv/project/.config/${BUILD_MODE}/nginx_app.conf \
+                    /etc/nginx/sites-available/ &&\
+        ln -sf      /etc/nginx/sites-available/nginx_app.conf \
+                    /etc/nginx/sites-enabled
+
+
+
+
+
+CMD     supervisord -c /srv/project/.config/${BUILD_MODE}/supervisord.conf -n
+EXPOSE  80
