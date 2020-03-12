@@ -5,6 +5,3 @@ ENV     LANG C.UTF-8
 RUN     apt -y update &&\
         apt -y dist-upgrade &&\
         apt -y install supervisor nginx
-
-
-

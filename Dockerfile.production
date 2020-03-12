@@ -1,9 +1,8 @@
 FROM    crawler:base
 
-
 COPY    .       /srv/project/
 
-ENV     BUILD_MODE      dev
+ENV     BUILD_MODE      production
 
 ENV     DJANGO_SETTINGS_MODULE=config.settings.${BUILD_MODE}
 
