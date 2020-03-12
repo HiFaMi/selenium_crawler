@@ -10,5 +10,5 @@ capture_out = True
 raw_env = [
     'DJANGO_SETTINGS_MODULE=config.settings.production',
 ]
-pythonpath = '/srv/project/app'
+
 
