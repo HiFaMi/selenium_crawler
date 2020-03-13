@@ -24,7 +24,7 @@ urlpatterns = [
 
     # normal views
     path('members/', include('members.urls.views')),
-    path('posts/', include('pictures.urls.views')),
+    path('', include('pictures.urls.views')),
 
 
     # api view
@@ -32,7 +32,7 @@ urlpatterns = [
     path('posts-api/', include('pictures.urls.api')),
 
     # bootstrap index
-    path('', TemplateView.as_view(template_name='index.html')),
+    # path('', TemplateView.as_view(template_name='index.html')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
