@@ -46,12 +46,11 @@ def mode_function(mode):
 
 
 def build_kill():
-    subprocess.call("{} sudo docker stop $(sudo docker ps -q)", shell=True)
+    subprocess.call("{} sudo docker stop $(sudo docker ps -q)".format(AWS_CONNECT), shell=True)
     print("Docker stop success")
 
 
 def build_deploy():
-
     subprocess.call("{} sudo docker build -t crawler:production -f /home/ubuntu/project/Dockerfile.production /home/ubuntu/project/.".format(AWS_CONNECT), shell=True)
     subprocess.call("{} sudo docker run -d -p 80:80 crawler:production".format(AWS_CONNECT), shell=True)
     print('Running Dockerfile')
