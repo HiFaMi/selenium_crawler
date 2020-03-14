@@ -3,13 +3,15 @@ from .base import *
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    '*',
+    'localhost',
+    '*.amazonaws.com',
+    'pby.kr',
+    'parkboyoung.kr',
 ]
 
 WSGI_APPLICATION = 'config.wsgi.production.application'
 
 # Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
     'default': {
