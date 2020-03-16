@@ -1,7 +1,13 @@
 # Selenium Crawler Project
 
+selenium으로 crawling한 데이터를 django model에 맞게 class화 하여
+최신순으로 보여준다.
+
 ### ENV
 
+nginx <--> gunucorn <--> Django
+
+poetry
 ```bash
 [tool.poetry]
 name = "poetry_test"
@@ -31,6 +37,6 @@ build-backend = "poetry.masonry.api"
 ### 배포
 Dockerfile 사용
 
-### Site url
+<!--### Site url-->
 [http://pby.kr]
 [http://parkboyoung.kr]
