@@ -37,6 +37,10 @@ build-backend = "poetry.masonry.api"
 ### 배포
 Dockerfile 사용
 
+환경: AWS EC2
+Database = AWS RDS postgresql
+
+### Site url
 <!--### Site url-->
 [http://pby.kr]
 [http://parkboyoung.kr]
