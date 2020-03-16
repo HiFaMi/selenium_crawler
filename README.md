@@ -38,7 +38,8 @@ build-backend = "poetry.masonry.api"
 Dockerfile 사용
 
 환경: AWS EC2
-Database = AWS RDS postgresql
+
+Database: AWS RDS postgresql
 
 ### Site url
 <!--### Site url-->
