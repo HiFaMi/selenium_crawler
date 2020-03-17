@@ -2,6 +2,8 @@ import pickle
 import os.path
 import ssl
 import urllib.request
+import boto3
+
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -10,6 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 from urllib.parse import urlparse
+from botocore.errorfactory import ClientError
 
 
 def instagram_login(email, password):
@@ -89,3 +92,35 @@ def download_twitter_image(imgs_element, user_name):
 
         if path_list[1] == "media" and os.path.exists(dir_path + path_list[2] + ".png") is False:
             urllib.request.urlretrieve(src, dir_path + path_list[2] + ".png")
+
+
+def download_twitter_image_to_s3(imgs_element, user_name):
+    ssl._create_default_https_context = ssl._create_unverified_context
+
+    session = boto3.Session(profile_name='gc-teamlab-eb')
+    s3_client = session.client('s3')
+    bucket = 'selenium-crawler'
+
+    for find_img in imgs_element:
+        src = find_img.get_attribute('src')
+        url = urlparse(src)
+        path_list = url.path.split("/")
+        dir_path = 'app/.media/img/'
+
+        try:
+            s3_client.head_object(Bucket=bucket, Key=f'.media/img/{user_name}')
+        except ClientError:
+            s3_client.put_object(Bucket=bucket, Key=f'.media/img/{user_name}/')
+
+        if path_list[1] == "media":
+            try:
+                s3_client.head_object(Bucket=bucket, Key=f'.media/img/{user_name}/{path_list[2]}.png')
+
+            except ClientError:
+                urllib.request.urlretrieve(src, dir_path+path_list[2] + ".png")
+                data = open(f'{dir_path}/{path_list[2]}.png', 'rb')
+                s3_client.put_object(Bucket=bucket, Body=data, Key=f'{path_list[2]}.png', ACL='public-read')
+                os.remove(f'{dir_path}/{path_list[2]}.png')
+
+
+
