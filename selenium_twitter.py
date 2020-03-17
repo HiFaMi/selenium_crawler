@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from selenium_crawling import twitter_login, save_and_load_cookie, download_twitter_image
+from selenium_crawling import twitter_login, save_and_load_cookie, download_twitter_image, download_twitter_image_to_s3
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 SECRET_DIR = os.path.join(ROOT_DIR, ".secret")
@@ -63,7 +63,7 @@ def twitter_crawler():
 
         time.sleep(3)
         find_imgs = driver.find_elements_by_css_selector("div > img")
-        download_twitter_image(imgs_element=find_imgs, user_name=sns)
+        download_twitter_image_to_s3(imgs_element=find_imgs, user_name=sns)
 
         # set loading time
         SCROLL_PAUSE_TIME = 4
@@ -79,7 +79,7 @@ def twitter_crawler():
             time.sleep(SCROLL_PAUSE_TIME)
 
             find_imgs = driver.find_elements_by_css_selector("div > img")
-            download_twitter_image(imgs_element=find_imgs, user_name=sns)
+            download_twitter_image_to_s3(imgs_element=find_imgs, user_name=sns)
 
             # Calculate new scroll height and compare with last scroll height
             new_height = driver.execute_script("return document.body.scrollHeight")
