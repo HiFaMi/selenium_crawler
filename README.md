@@ -41,6 +41,8 @@ Dockerfile 사용
 
 Database: AWS RDS postgresql
 
+storage: AWS S3
+
 ### Site url
 <!--### Site url-->
 [http://pby.kr]
