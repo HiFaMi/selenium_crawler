@@ -47,7 +47,7 @@ def mode_function(mode):
 
 
 def build_kill():
-    command = subprocess.check_output("{} sudo docker ps -q".format(AWS_CONNECT), shell=True)
+    command = subprocess.check_output("{} sudo docker ps --filter ancestor=crawler:production -q".format(AWS_CONNECT), shell=True)
     if bool(command) is True:
         print("One docker process is activated\nkill docker process")
         subprocess.call("{} sudo docker stop {}".format(AWS_CONNECT, command.decode('utf-8')[:-2]), shell=True)
