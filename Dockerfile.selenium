@@ -1,0 +1,16 @@
+FROM    selenium:base
+
+
+RUN     mkdir /srv/project
+RUN     mkdir /srv/project/.secret
+
+COPY    .secret /srv/project/.secret
+COPY    selenium_crawling.py /srv/project
+COPY    selenium_twitter.py /srv/project
+COPY    selenium_img_down.py /srv/project
+COPY    apscheduler_test.py /srv/project
+
+WORKDIR /srv/project
+
+CMD     python apscheduler_test.py
+
