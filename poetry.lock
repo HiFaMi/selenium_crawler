@@ -166,6 +166,18 @@ version = "2.2.8"
 six = ">=1.2"
 
 [[package]]
+category = "dev"
+description = "Django SecretsManager is custom secret managers for Django"
+name = "django-secrets-manager"
+optional = false
+python-versions = ">3.5"
+version = "0.1.12"
+
+[package.dependencies]
+boto3 = "*"
+django = "*"
+
+[[package]]
 category = "main"
 description = "Support for many storage backends in Django"
 name = "django-storages"
@@ -871,7 +883,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools"]
 
 [metadata]
-content-hash = "5c5ea36cc7186ffb28d9d311e0fca25869059ae95c07f1d158edf848fed0aebe"
+content-hash = "10a4dfd2483497ee5c24cf7d2116b46324a626eed96c2b144a6341ab4cf0398c"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -927,6 +939,10 @@ django = [
 django-extensions = [
     {file = "django-extensions-2.2.8.tar.gz", hash = "sha256:2699cc1d6fb4bd393c0b5832fea4bc685f2ace5800b3c9ff222b2080f161ac04"},
     {file = "django_extensions-2.2.8-py2.py3-none-any.whl", hash = "sha256:1a03c4e8bade575f8c2be6c76456f8a2be3f9b02ab9f47d3535afa9562dc0493"},
+]
+django-secrets-manager = [
+    {file = "django-secrets-manager-0.1.12.tar.gz", hash = "sha256:e89d1e9c81b5b0f84970f16d0e79637fcd2293022b8c47a11f05f34b03878f68"},
+    {file = "django_secrets_manager-0.1.12-py3-none-any.whl", hash = "sha256:a3880cf93a45a2527dad992e92185a0553e90c38968d807e0b14c444f30b7b95"},
 ]
 django-storages = [
     {file = "django-storages-1.9.1.tar.gz", hash = "sha256:a59e9923cbce7068792f75344ed7727021ee4ac20f227cf17297d0d03d141e91"},

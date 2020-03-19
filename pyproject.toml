@@ -19,6 +19,7 @@ django_storages = "^1.9.1"
 [tool.poetry.dev-dependencies]
 django-extensions = "^2.2.8"
 jupyter = "^1.0.0"
+django-secrets-manager = "^0.1.12"
 
 [build-system]
 requires = ["poetry>=0.12"]
