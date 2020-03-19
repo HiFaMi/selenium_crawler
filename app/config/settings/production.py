@@ -11,8 +11,10 @@ ALLOWED_HOSTS = [
 
 WSGI_APPLICATION = 'config.wsgi.production.application'
 
+AWS_SECRETS_MANAGER_SECRET_SECTION = 'project_crawler:production'
+
 # s3 setting
-AWS_REAGION = "ap-northeasr-2"
+AWS_REAGION = "ap-northeast-2"
 AWS_STORAGE_BUCKET_NAME = 'selenium-crawler'
 
 AWS_QUERYSTRING_AUTH = False
@@ -35,10 +37,10 @@ DEFAULT_FILE_STORAGE = 'config.storage_backend.MediaStorage'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': secrets['DATABASE']['DB_HOST'],
-        'PORT': secrets['DATABASE']['DB_PORT'],
-        'NAME': secrets['DATABASE']['DB_NAME'],
-        'USER': secrets['DATABASE']['DB_USER'],
-        'PASSWORD': secrets['DATABASE']['DB_PASSWORD'],
+        'HOST': SECRETS['DATABASE']['DB_HOST'],
+        'PORT': SECRETS['DATABASE']['DB_PORT'],
+        'NAME': SECRETS['DATABASE']['DB_NAME'],
+        'USER': SECRETS['DATABASE']['DB_USER'],
+        'PASSWORD': SECRETS['DATABASE']['DB_PASSWORD']
     }
 }
