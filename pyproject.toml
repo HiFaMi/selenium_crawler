@@ -16,6 +16,7 @@ psycopg2-binary = "^2.8.4"
 apscheduler = "^3.6.3"
 boto3 = "^1.12.22"
 django_storages = "^1.9.1"
+django-secrets-manager = "^0.1.12"
 [tool.poetry.dev-dependencies]
 django-extensions = "^2.2.8"
 jupyter = "^1.0.0"

@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 import json
 
+from django_secrets import SECRETS
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -30,10 +32,14 @@ SECRET_KEY = '2konjx-%bo3&frd+wlymo@3*w--h0d5bv-!ota&r!^1!f8a)tq'
 
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
+AWS_SECRETS_MANAGER_SECRET_NAME = 'project_selenium_crawler'
 
+AWS_ACCESS_KEY_ID = secrets['AWS']['AWS_ACCESS_KEY']
+AWS_SECRET_ACCESS_KEY = secrets['AWS']['AWS_SECRET_ACCESS_KEY']
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+AWS_SECRETS_MANAGER_SECRET_SECTION = 'project_crawler:base'
+AWS_SECRETS_MANAGER_REGION_NAME = 'ap-northeast-2'
+
 
 AUTH_USER_MODEL = 'members.User'
 

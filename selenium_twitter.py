@@ -4,10 +4,6 @@ import os
 import json
 import time
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
 from selenium_crawling import twitter_login, save_and_load_cookie, download_twitter_image, download_twitter_image_to_s3, twitter_login_headless
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -15,8 +11,12 @@ SECRET_DIR = os.path.join(ROOT_DIR, ".secret")
 
 secrets = json.load(open(os.path.join(SECRET_DIR, "secrets.json")))
 
+
 email = secrets["TWITTER_EMAIL"]
 password = secrets["TWITTER_PASSWORD"]
+
+AWS_ACCESS_KEY = secrets['AWS']['AWS_ACCESS_KEY']
+AWS_SECRET_ACCESS_KEY = secrets['AWS']['AWS_SECRET_ACCESS_KEY']
 
 
 def twitter_crawler():
@@ -62,7 +62,7 @@ def twitter_crawler():
 
         time.sleep(3)
         find_imgs = driver.find_elements_by_css_selector("div > img")
-        download_twitter_image_to_s3(imgs_element=find_imgs, user_name=sns)
+        download_twitter_image_to_s3(imgs_element=find_imgs, user_name=sns, aws_access_key=AWS_ACCESS_KEY, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
 
         # set loading time
         SCROLL_PAUSE_TIME = 4
@@ -78,7 +78,7 @@ def twitter_crawler():
             time.sleep(SCROLL_PAUSE_TIME)
 
             find_imgs = driver.find_elements_by_css_selector("div > img")
-            download_twitter_image_to_s3(imgs_element=find_imgs, user_name=sns)
+            download_twitter_image_to_s3(imgs_element=find_imgs, user_name=sns, aws_access_key=AWS_ACCESS_KEY, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
 
             # Calculate new scroll height and compare with last scroll height
             new_height = driver.execute_script("return document.body.scrollHeight")
