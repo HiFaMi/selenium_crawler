@@ -4,19 +4,25 @@ import os
 import json
 import time
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
+from django_secrets import SECRETS
 from selenium_crawling import twitter_login, save_and_load_cookie, download_twitter_image, download_twitter_image_to_s3, twitter_login_headless
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-SECRET_DIR = os.path.join(ROOT_DIR, ".secret")
+SECRET_DIR = os.path.join(ROOT_DIR, "../.secret")
 
 secrets = json.load(open(os.path.join(SECRET_DIR, "secrets.json")))
 
-email = secrets["TWITTER_EMAIL"]
-password = secrets["TWITTER_PASSWORD"]
+AWS_SECRETS_MANAGER_SECRET_NAME = 'project_selenium_crawler'
+
+AWS_ACCESS_KEY_ID = secrets['AWS']['AWS_ACCESS_KEY']
+AWS_SECRET_ACCESS_KEY = secrets['AWS']['AWS_SECRET_ACCESS_KEY']
+
+AWS_SECRETS_MANAGER_SECRET_SECTION = 'project_crawler:base'
+AWS_SECRETS_MANAGER_REGION_NAME = 'ap-northeast-2'
+
+
+email = SECRETS["TWITTER_EMAIL"]
+password = SECRETS["TWITTER_PASSWORD"]
 
 
 def twitter_crawler():
