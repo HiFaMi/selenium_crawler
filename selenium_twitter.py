@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from selenium_crawling import twitter_login, save_and_load_cookie, download_twitter_image, download_twitter_image_to_s3
+from selenium_crawling import twitter_login, save_and_load_cookie, download_twitter_image, download_twitter_image_to_s3, twitter_login_headless
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 SECRET_DIR = os.path.join(ROOT_DIR, ".secret")
@@ -22,8 +22,7 @@ password = secrets["TWITTER_PASSWORD"]
 def twitter_crawler():
 
     # twitter login
-    driver = twitter_login(email, password)
-
+    driver = twitter_login_headless(email, password)
 
     driver.implicitly_wait(10)
     driver.maximize_window()
