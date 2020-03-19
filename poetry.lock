@@ -166,7 +166,7 @@ version = "2.2.8"
 six = ">=1.2"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Django SecretsManager is custom secret managers for Django"
 name = "django-secrets-manager"
 optional = false
@@ -883,7 +883,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools"]
 
 [metadata]
-content-hash = "10a4dfd2483497ee5c24cf7d2116b46324a626eed96c2b144a6341ab4cf0398c"
+content-hash = "8186230e07410134d56ada99541d0f1a1b07494989d50e2245d1b0cbf6e24fc7"
 python-versions = "^3.6"
 
 [metadata.files]
