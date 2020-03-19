@@ -95,6 +95,7 @@ def twitter_login_headless(email, password):
 
     return driver
 
+
 def save_and_load_cookie(driver, change_url):
     pickle.dump(driver.get_cookies(), open("login_live.pkl", "wb"))
 
@@ -122,10 +123,10 @@ def download_twitter_image(imgs_element, user_name):
             urllib.request.urlretrieve(src, dir_path + path_list[2] + ".png")
 
 
-def download_twitter_image_to_s3(imgs_element, user_name):
+def download_twitter_image_to_s3(imgs_element, user_name, aws_access_key, aws_secret_access_key):
     ssl._create_default_https_context = ssl._create_unverified_context
 
-    session = boto3.Session(profile_name='gc-teamlab-eb')
+    session = boto3.Session(aws_access_key_id=aws_access_key, aws_secret_access_key=aws_secret_access_key)
     s3_client = session.client('s3')
     bucket = 'selenium-crawler'
 

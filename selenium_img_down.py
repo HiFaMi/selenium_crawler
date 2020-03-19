@@ -1,7 +1,6 @@
 import os
 import json
 
-from django_secrets import SECRETS
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -12,21 +11,12 @@ from selenium_crawling import instagram_login
 
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-SECRET_DIR = os.path.join(ROOT_DIR, "../.secret")
+SECRET_DIR = os.path.join(ROOT_DIR, "../poetry_test/.secret")
 
 secrets = json.load(open(os.path.join(SECRET_DIR, "secrets.json")))
 
-AWS_SECRETS_MANAGER_SECRET_NAME = 'project_selenium_crawler'
-
-AWS_ACCESS_KEY_ID = secrets['AWS']['AWS_ACCESS_KEY']
-AWS_SECRET_ACCESS_KEY = secrets['AWS']['AWS_SECRET_ACCESS_KEY']
-
-AWS_SECRETS_MANAGER_SECRET_SECTION = 'project_crawler:base'
-AWS_SECRETS_MANAGER_REGION_NAME = 'ap-northeast-2'
-
-
-email = SECRETS["INSTAGRAM_EMAIL"]
-password = SECRETS["INSTAGRAM_PASSWORD"]
+email = secrets["INSTAGRAM_EMAIL"]
+password = secrets["INSTAGRAM_PASSWORD"]
 driver = instagram_login(email, password)
 
 driver.implicitly_wait(10)
