@@ -67,6 +67,34 @@ def twitter_login(email, password):
     return driver
 
 
+def twitter_login_headless(email, password):
+    path = "/usr/local/bin/chromedriver"
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--window-size=1920,1080')
+    chrome_options.add_argument('--disable-gpu')
+    driver = webdriver.Chrome(path, options=chrome_options)
+
+    driver.get("https://twitter.com")
+
+    wait = WebDriverWait(driver, 10)
+
+    login_elem = wait.until(EC.element_to_be_clickable(
+        (By.XPATH,
+         """//*[@id="react-root"]/div/div/div/main/div/div/div/div[1]/div/a[2]/div""")))
+    login_elem.click()
+
+    emei = wait.until(EC.element_to_be_clickable(
+        (By.NAME, "session[username_or_email]")))
+    emei.send_keys(email)
+
+    emei = driver.find_element_by_name("session[password]")
+    emei.send_keys(password)
+    emei.submit()
+
+    return driver
+
 def save_and_load_cookie(driver, change_url):
     pickle.dump(driver.get_cookies(), open("login_live.pkl", "wb"))
 
@@ -119,7 +147,7 @@ def download_twitter_image_to_s3(imgs_element, user_name):
             except ClientError:
                 urllib.request.urlretrieve(src, dir_path+path_list[2] + ".png")
                 data = open(f'{dir_path}/{path_list[2]}.png', 'rb')
-                s3_client.put_object(Bucket=bucket, Body=data, Key=f'{path_list[2]}.png', ACL='public-read')
+                s3_client.put_object(Bucket=bucket, Body=data, Key=f'.media/img/{user_name}/{path_list[2]}.png', ACL='public-read')
                 os.remove(f'{dir_path}/{path_list[2]}.png')
 
 
