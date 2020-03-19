@@ -27,6 +27,6 @@ if __name__ == '__main__':
 
     sched = BackgroundScheduler()
     sched.start()
-    sched.add_job(job_crawler, 'corn', day=15, hour=2, id='test_1', start_date=datetime.datetime.now())
+    sched.add_job(job_crawler, 'cron', day=15, hour=2, id='test_1', start_date=datetime.datetime.now())
     input("Press enter to exit.")
     sched.shutdown()
