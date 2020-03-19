@@ -3,6 +3,7 @@ from .base import *
 DEBUG = False
 
 ALLOWED_HOSTS = [
+    'localhost',
     '*.amazonaws.com',
     'pby.kr',
     'parkboyoung.kr',
