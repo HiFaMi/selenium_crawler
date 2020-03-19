@@ -6,7 +6,7 @@ import subprocess
 import argparse
 import sys
 
-MODES = ['kill', 'deploy', 'base', 'maker', 'oneclick']
+MODES = ['kill_crawler', 'kill_selenium', 'deploy', 'base', 'maker', 'oneclick', 'selenium']
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 SECRET_DIR = os.path.join(ROOT_DIR, '.secret')
@@ -46,10 +46,20 @@ def mode_function(mode):
         raise ValueError('{} 안에 있는 값만 가능합니다.'.format(MODES))
 
 
-def build_kill():
+def build_kill_crawler():
     command = subprocess.check_output("{} sudo docker ps --filter ancestor=crawler:production -q".format(AWS_CONNECT), shell=True)
     if bool(command) is True:
-        print("One docker process is activated\nkill docker process")
+        print("crawler:production docker process is activated\nkill docker process")
+        subprocess.call("{} sudo docker stop {}".format(AWS_CONNECT, command.decode('utf-8')[:-2]), shell=True)
+        print("kill")
+    else:
+        print("None docker process")
+
+
+def build_kill_selenium():
+    command = subprocess.check_output("{} sudo docker ps --filter ancestor=selenium:run -q".format(AWS_CONNECT), shell=True)
+    if bool(command) is True:
+        print("selenium:run docker process is activated\nkill docker process")
         subprocess.call("{} sudo docker stop {}".format(AWS_CONNECT, command.decode('utf-8')[:-2]), shell=True)
         print("kill")
     else:
@@ -80,8 +90,15 @@ def build_maker():
         os.remove('requirements.txt')
 
 
+def build_selenium():
+    build_kill_selenium()
+    subprocess.call("{} sudo docker build -t selenium:base -f /home/ubuntu/project/Dockerfile.selenium_base /home/ubuntu/project/.".format(AWS_CONNECT), shell=True)
+    subprocess.call("{} sudo docker build -t selenium:run -f /home/ubuntu/project/Dockerfile.selenium /home/ubuntu/project/.".format(AWS_CONNECT), shell=True)
+    subprocess.call("{} sudo docker run -d --rm -it selenium:run".format(AWS_CONNECT), shell=True)
+
+
 def build_oneclick():
-    build_kill()
+    build_kill_crawler()
     build_maker()
     build_deploy()
 
