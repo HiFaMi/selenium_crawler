@@ -6,27 +6,17 @@ import subprocess
 import argparse
 import sys
 
-from django_secrets import SECRETS
-
 MODES = ['kill_crawler', 'kill_selenium', 'deploy', 'base', 'maker', 'oneclick', 'selenium']
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-SECRET_DIR = os.path.join(ROOT_DIR, '../.secret')
+SECRET_DIR = os.path.join(ROOT_DIR, '.secret')
 
 secrets = json.load(open(os.path.join(SECRET_DIR, 'secrets.json')))
 
-AWS_SECRETS_MANAGER_SECRET_NAME = 'project_selenium_crawler'
 
-AWS_ACCESS_KEY_ID = secrets['AWS']['AWS_ACCESS_KEY']
-AWS_SECRET_ACCESS_KEY = secrets['AWS']['AWS_SECRET_ACCESS_KEY']
-
-AWS_SECRETS_MANAGER_SECRET_SECTION = 'project_crawler:base'
-AWS_SECRETS_MANAGER_REGION_NAME = 'ap-northeast-2'
-
-
-AWS_KEY_ROOT = SECRETS['AWS']['AWS_ACCESS_KEY_ROOT']
-AWS_URL_CONNECT = SECRETS['AWS']['AWS_URL_CONNECT']
-ROOT_PASSWORD = SECRETS['ROOT']['PASSWORD']
+AWS_KEY_ROOT = secrets['AWS']['AWS_ACCESS_KEY_ROOT']
+AWS_URL_CONNECT = secrets['AWS']['AWS_URL_CONNECT']
+ROOT_PASSWORD = secrets['ROOT']['PASSWORD']
 
 AWS_CONNECT = 'ssh -i {} {}'.format(AWS_KEY_ROOT, AWS_URL_CONNECT)
 AWS_SCP_FILE = 'scp -i {}'.format(AWS_KEY_ROOT)
