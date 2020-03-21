@@ -31,6 +31,9 @@ urlpatterns = [
     path('members-api/', include('members.urls.api')),
     path('posts-api/', include('pictures.urls.api')),
 
+    # allauth
+    path('accounts/', include('allauth.urls')),
+
     # bootstrap index
     # path('', TemplateView.as_view(template_name='index.html')),
 

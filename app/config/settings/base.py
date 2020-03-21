@@ -45,6 +45,8 @@ AUTH_USER_MODEL = 'members.User'
 
 AUTHENTICATION_BACKEND = [
     'django.contrib.auth.backends.ModelBackend',
+
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 LOGIN_URL = 'members:login'
@@ -66,7 +68,12 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 
     'storages',
+
+    'allauth',
 ]
+
+# allauth
+SITE_ID = 1
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
@@ -80,6 +87,8 @@ REST_FRAMEWORK = {
     ],
 
 }
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
