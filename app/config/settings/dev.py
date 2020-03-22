@@ -5,11 +5,11 @@ DEBUG = True
 WSGI_APPLICATION = 'config.wsgi.dev.application'
 
 INSTALLED_APPS += [
-    'django_extensions'
+    'django_extensions',
 ]
 
 
-#dec static media
+# dev static media
 
 STATIC_ROOT = os.path.join(BASE_DIR, '.static')
 STATIC_URL = '/static/'
@@ -31,4 +31,3 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
