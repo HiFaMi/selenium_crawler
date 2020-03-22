@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'members.apps.MembersConfig',
     'pictures.apps.PicturesConfig',
@@ -70,10 +71,18 @@ INSTALLED_APPS = [
     'storages',
 
     'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    'allauth.socialaccount.providers.github',
 ]
 
 # allauth
 SITE_ID = 1
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+LOGIN_REDIRECT_URL = "/"
+ACCOUNT_AUTHENTICATED_LOGOUT_REDIRECTS = True
+LOGOUT_REDIRECT_URL = "/"
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
