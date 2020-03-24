@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% load socialaccount %}
 {% block content %}
     <section class="page-section portfolio" id="portfolio">
@@ -41,6 +42,9 @@
                             <div>
                                 <a href="{% provider_login_url 'github' method='oauth2' %}">
                                     <i class="fab fa-github fa-3x" style="color: black"></i>
+                                </a>
+                                <a href="{% provider_login_url 'kakao' method='oauth2' %}">
+                                    <img src="{% static 'img/kakao_account_login_btn.png' %}" alt="">
                                 </a>
                             </div>
                         </form>
