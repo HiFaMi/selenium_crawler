@@ -75,15 +75,18 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.kakao',
 ]
 
 # allauth
-SITE_ID = 4
+
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
 LOGIN_REDIRECT_URL = "/"
 ACCOUNT_AUTHENTICATED_LOGOUT_REDIRECTS = True
 LOGOUT_REDIRECT_URL = "/"
-USE_X_FORWARDED_HOST = True
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USER_MODEL_EMAIL_FIELD = 'user_email'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
@@ -98,6 +101,10 @@ REST_FRAMEWORK = {
 
 }
 
+# Static files
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 
 MIDDLEWARE = [
