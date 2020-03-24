@@ -32,6 +32,9 @@ STATICFILES_STORAGE = 'config.storage_backend.StaticStorage'
 MEDIA_URL = f"http://{AWS_S3_CUSTOM_DOMAIN}/.media/"
 DEFAULT_FILE_STORAGE = 'config.storage_backend.MediaStorage'
 
+# allauth SITE_ID 지정 안할경우 host domain으로 지정
+SITE_ID = 4
+
 # Database
 
 DATABASES = {
