@@ -18,8 +18,9 @@ AWS_KEY_ROOT = secrets['AWS']['AWS_ACCESS_KEY_ROOT']
 AWS_URL_CONNECT = secrets['AWS']['AWS_URL_CONNECT']
 ROOT_PASSWORD = secrets['ROOT']['PASSWORD']
 
-AWS_CONNECT = 'ssh -i {} {}'.format(AWS_KEY_ROOT, AWS_URL_CONNECT)
-AWS_SCP_FILE = 'scp -i {}'.format(AWS_KEY_ROOT)
+AWS_CONNECT_PEM = f'ssh -i {AWS_KEY_ROOT}'
+AWS_CONNECT = f'ssh -i {AWS_KEY_ROOT} {AWS_URL_CONNECT}'
+AWS_SCP_FILE = f'scp -i {AWS_KEY_ROOT}'
 
 
 def get_mode():
@@ -51,7 +52,8 @@ def build_kill_crawler():
     if bool(command) is True:
         print("crawler:production docker process is activated\nkill docker process")
         subprocess.call("{} sudo docker stop {}".format(AWS_CONNECT, command.decode('utf-8')[:-2]), shell=True)
-        print("kill")
+        # subprocess.call("{} sudo docker rmi -f $(sudo docker images -f 'dangling=true' -q)".format(AWS_CONNECT))
+        print("kill and docker images clean")
     else:
         print("None docker process")
 
@@ -82,7 +84,7 @@ def build_maker():
     try:
         subprocess.call('poetry export -f requirements.txt > requirements.txt', shell=True)
         subprocess.call("{} sudo rm -rf project".format(AWS_CONNECT), shell=True)
-        subprocess.call("echo {} | sudo -S {} -r ~/project/poetry_test/ {}:".format(ROOT_PASSWORD, AWS_SCP_FILE, AWS_URL_CONNECT), shell=True)
+        subprocess.call("rsync -avL --progress --exclude='.media' -e '{}' ~/project/poetry_test {}:".format(AWS_CONNECT_PEM, AWS_URL_CONNECT), shell=True)
         subprocess.call("{} sudo mv /home/ubuntu/poetry_test /home/ubuntu/project".format(AWS_CONNECT), shell=True)
         print('Rename to project')
 
