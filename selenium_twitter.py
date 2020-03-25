@@ -12,8 +12,8 @@ SECRET_DIR = os.path.join(ROOT_DIR, ".secret")
 secrets = json.load(open(os.path.join(SECRET_DIR, "secrets.json")))
 
 
-email = secrets["TWITTER_EMAIL"]
-password = secrets["TWITTER_PASSWORD"]
+email = secrets["SOCIAL"]["TWITTER_EMAIL"]
+password = secrets["SOCIAL"]["TWITTER_PASSWORD"]
 
 AWS_ACCESS_KEY = secrets['AWS']['AWS_ACCESS_KEY']
 AWS_SECRET_ACCESS_KEY = secrets['AWS']['AWS_SECRET_ACCESS_KEY']

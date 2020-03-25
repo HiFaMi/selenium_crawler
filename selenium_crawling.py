@@ -96,6 +96,26 @@ def twitter_login_headless(email, password):
     return driver
 
 
+def facebook_login(email, password):
+    path = "/usr/local/bin/chromedriver"
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--disable-notifications")
+    chrome_options.add_experimental_option("detach", True)
+    driver = webdriver.Chrome(path, options=chrome_options)
+
+    driver.get("https://facebook.com")
+
+    driver.implicitly_wait(10)
+
+    emei = driver.find_element_by_name("email")
+    emei.send_keys(email)
+    emei = driver.find_element_by_name("pass")
+    emei.send_keys(password)
+    emei.send_keys(Keys.ENTER)
+
+    return driver
+
+
 def save_and_load_cookie(driver, change_url):
     pickle.dump(driver.get_cookies(), open("login_live.pkl", "wb"))
 
