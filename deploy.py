@@ -16,7 +16,6 @@ secrets = json.load(open(os.path.join(SECRET_DIR, 'secrets.json')))
 
 AWS_KEY_ROOT = secrets['AWS']['AWS_ACCESS_KEY_ROOT']
 AWS_URL_CONNECT = secrets['AWS']['AWS_URL_CONNECT']
-ROOT_PASSWORD = secrets['ROOT']['PASSWORD']
 
 AWS_CONNECT_PEM = f'ssh -i {AWS_KEY_ROOT}'
 AWS_CONNECT = f'ssh -i {AWS_KEY_ROOT} {AWS_URL_CONNECT}'
