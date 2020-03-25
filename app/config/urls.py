@@ -35,7 +35,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
 
     # bootstrap index
-    # path('', TemplateView.as_view(template_name='index.html')),
+    path('index/', TemplateView.as_view(template_name='index.html')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
