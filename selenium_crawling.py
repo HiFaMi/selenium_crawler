@@ -4,7 +4,6 @@ import ssl
 import urllib.request
 import boto3
 
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -172,4 +171,16 @@ def download_twitter_image_to_s3(imgs_element, user_name, aws_access_key, aws_se
                 os.remove(f'{dir_path}/{path_list[2]}.png')
 
 
+def download_facebook_image(src):
+    ssl._create_default_https_context = ssl._create_unverified_context
 
+    url = urlparse(src)
+
+    name = url.path.split('/')[-1][:-4]
+    dir_path = 'app/.media/img/facebook/'
+
+    if os.path.exists(dir_path + name + ".png") is False:
+        urllib.request.urlretrieve(src, dir_path + name + ".png")
+
+    else:
+        return False
