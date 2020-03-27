@@ -1,22 +1,13 @@
 #!/usr/bin/env python
 
-import os
-import json
-import re
 import time
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from config.settings.base import secrets
 from selenium_crawling import facebook_login, download_facebook_image, download_facebook_image_to_s3
-
-ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-SECRET_DIR = os.path.join(ROOT_DIR, ".secret")
-
-secrets = json.load(open(os.path.join(SECRET_DIR, "secrets.json")))
-
 
 email = secrets["SOCIAL"]["FACEBOOK_EMAIL"]
 password = secrets["SOCIAL"]["FACEBOOK_PASSWORD"]
