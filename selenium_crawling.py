@@ -99,7 +99,7 @@ def facebook_login(email, password):
     path = "/usr/local/bin/chromedriver"
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument("--disable-notifications")
-    chrome_options.add_experimental_option("detach", True)
+    # chrome_options.add_experimental_option("detach", True)
     driver = webdriver.Chrome(path, options=chrome_options)
 
     driver.get("https://facebook.com")
@@ -184,3 +184,25 @@ def download_facebook_image(src):
 
     else:
         return False
+
+
+def download_facebook_image_to_s3(src, aws_access_key, aws_secret_access_key):
+    ssl._create_default_https_context = ssl._create_unverified_context
+
+    session = boto3.Session(aws_access_key_id=aws_access_key, aws_secret_access_key=aws_secret_access_key)
+    s3_client = session.client('s3')
+    bucket = 'selenium-crawler'
+    url = urlparse(src)
+
+    name = url.path.split('/')[-1][:-4]
+    dir_path = 'app/.media/img/'
+
+    try:
+        s3_client.head_object(Bucket=bucket, Key=f'.media/img/facebook/{name}.png')
+        return False
+
+    except ClientError:
+        urllib.request.urlretrieve(src, f'{dir_path}{name}.png')
+        data = open(f'{dir_path}{name}.png', 'rb')
+        s3_client.put_object(Bucket=bucket, Body=data, Key=f'.media/img/facebook/{name}.png', ACL='public-read')
+        os.remove(f'{dir_path}{name}.png')

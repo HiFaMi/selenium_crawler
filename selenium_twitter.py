@@ -1,16 +1,9 @@
 #!/usr/bin/env python
 
-import os
-import json
 import time
 
+from config.settings.base import secrets
 from selenium_crawling import twitter_login, save_and_load_cookie, download_twitter_image, download_twitter_image_to_s3, twitter_login_headless
-
-ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-SECRET_DIR = os.path.join(ROOT_DIR, ".secret")
-
-secrets = json.load(open(os.path.join(SECRET_DIR, "secrets.json")))
-
 
 email = secrets["SOCIAL"]["TWITTER_EMAIL"]
 password = secrets["SOCIAL"]["TWITTER_PASSWORD"]
