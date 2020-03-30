@@ -82,7 +82,7 @@ def s3_to_facebook_crawler_make_class():
                     post_picture=f'img/facebook/{path}'
                 )
                 post = PostPicture.objects.last()
-                post.post_modal_target = post.id
+                post.post_modal_target = f'PostModalTarget{post.id}'
                 post.save()
 
                 new_post += 1
