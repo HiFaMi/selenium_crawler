@@ -1,8 +1,10 @@
 import os
 
+import boto3
 from django.conf import settings
 from django.db import models
 
+from config.settings.base import AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
 from config.settings.dev import MEDIA_ROOT
 
 
@@ -19,7 +21,9 @@ class PostPicture(models.Model):
     def like_count(self):
         return self.post_likes.count()
 
-    def delete(self, *args, **kwargs):
-        os.remove(f'{MEDIA_ROOT}/{self.post_picture}')
-        print(f'{self.post_picture} is deleted')
+    def delete_picture(self, *args, **kwargs):
+        session = boto3.Session(aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+        s3 = session.client('s3')
+        s3.delete_object(Bucket='selenium-crawler', Key=f'.media/{self.post_picture}')
+        print(f"{str(self.post_picture).split('/')[-1]} deleted")
         super().delete(*args, **kwargs)
