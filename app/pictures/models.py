@@ -1,5 +1,9 @@
+import os
+
 from django.conf import settings
 from django.db import models
+
+from config.settings.dev import MEDIA_ROOT
 
 
 class PostPicture(models.Model):
@@ -14,3 +18,8 @@ class PostPicture(models.Model):
     @property
     def like_count(self):
         return self.post_likes.count()
+
+    def delete(self, *args, **kwargs):
+        os.remove(f'{MEDIA_ROOT}/{self.post_picture}')
+        print(f'{self.post_picture} is deleted')
+        super().delete(*args, **kwargs)
