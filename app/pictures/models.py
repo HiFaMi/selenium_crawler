@@ -1,11 +1,8 @@
-import os
-
 import boto3
 from django.conf import settings
 from django.db import models
 
 from config.settings.base import AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
-from config.settings.dev import MEDIA_ROOT
 
 
 class PostPicture(models.Model):
