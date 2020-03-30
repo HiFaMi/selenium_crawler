@@ -34,6 +34,32 @@ build-backend = "poetry.masonry.api"
 ```
 
 
+`secret.json`
+
+```json
+{
+  "SOCIAL": {
+
+    "INSTAGRAM_EMAIL": "instagram email",
+    "INSTAGRAM_PASSWORD": "instagram password",
+
+    "TWITTER_EMAIL": "twitter email",
+    "TWITTER_PASSWORD": "twitter password",
+
+    "FACEBOOK_EMAIL": "facebook email",
+    "FACEBOOK_PASSWORD": "facebook password"
+  },
+
+  "AWS": {
+    "AWS_ACCESS_KEY_ROOT": "local pem location",
+    "AWS_URL_CONNECT": "aws url",
+    "AWS_ACCESS_KEY": "aws access key",
+    "AWS_SECRET_ACCESS_KEY": "aws secret access key"
+  }
+
+}
+```
+
 ### 배포
 Dockerfile 사용
 
