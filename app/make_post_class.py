@@ -11,6 +11,7 @@ from pictures.models import PostPicture
 
 PRESENT_DIR = os.path.abspath('')
 IMG_DIR = os.path.join(PRESENT_DIR, '.media/img')
+FACEBOOK_DIR = os.path.join(PRESENT_DIR, '.media/img/facebook')
 
 
 def local_to_twitter_crawler_class():
@@ -41,6 +42,29 @@ def local_to_twitter_crawler_class():
     print("Done")
 
 
+def local_to_facebook_crawler_make_class():
+
+    img_lists = os.listdir(FACEBOOK_DIR)
+    new_img_counter = 0
+    for img_list in img_lists:
+        if PostPicture.objects.filter(post_picture=f'img/facebook/{img_list}').exists() is False:
+            PostPicture.objects.create(
+                post_user='facebook',
+                post_picture=f'img/facebook/{img_list}'
+            )
+            post = PostPicture.objects.last()
+            post.post_modal_target = "PostModalTarget{}".format(post.id)
+            post.save()
+
+            new_img_counter += 1
+
+    if new_img_counter == 0:
+        print("nothing new img about facebook")
+    else:
+        print(f"new img about facebook: +{new_img_counter}")
+    print("Done")
+
+
 def s3_to_facebook_crawler_make_class():
     session = boto3.Session(aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
     s3 = session.resource('s3')
@@ -64,3 +88,7 @@ def s3_to_facebook_crawler_make_class():
                 new_post += 1
 
     print(f'create {new_post} new post class')
+
+
+if __name__ == '__main__':
+    local_to_facebook_crawler_make_class()
