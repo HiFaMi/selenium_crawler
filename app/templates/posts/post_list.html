@@ -11,16 +11,13 @@
                 </div>
                 <div class="divider-custom-line"></div>
             </div>
-            <div class="row infinite-container" id="card-wrapper" style="justify-content: normal;">
+            <div class="infinite-container" id="columns" style="justify-content: normal;">
 
-
-                {% for post in posts %}
-
-                    <div class="infinite-item" data-toggle="modal" data-target="#{{ post.post_modal_target }}">
-                        <img class="img-thumbnail" src="{{ post.post_picture.url }}" alt="" style="height: 100%;" width="150px;">
-                    </div>
-
-                {% endfor %}
+                    {% for post in posts %}
+                        <figure class="infinite-item" data-toggle="modal" data-target="#{{ post.post_modal_target }}">
+                            <img src="{{ post.post_picture.url }}" alt="">
+                        </figure>
+                    {% endfor %}
 
                 {% for post in posts %}
                     <div class="portfolio-modal modal fade infinite-item" id="{{ post.post_modal_target }}" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
