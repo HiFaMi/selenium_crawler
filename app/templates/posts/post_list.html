@@ -1,6 +1,25 @@
 {% extends 'base.html' %}
+{% include 'figure_style.html' %}
 {% load staticfiles %}
+{% block head %}
+
+    <style>
+
+        .grid-sizer, .grid-item{
+            width: 24.5%;
+        }
+
+
+        .grid-item img{
+            display: block;
+            min-width: 100%;
+            max-width: 100%;
+        }
+    </style>
+
+{% endblock %}
 {% block content %}
+
     <section class="page-section portfolio" id="portfolio">
         <div class="container user-container">
             <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Pictures</h2>
@@ -11,96 +30,133 @@
                 </div>
                 <div class="divider-custom-line"></div>
             </div>
-            <div class="infinite-container" id="columns" style="justify-content: normal;">
-
+            <div class="grid infinite-container">
+                <div class="grid-sizer">
+                </div>
+                <div>
                     {% for post in posts %}
-                        <figure class="infinite-item" data-toggle="modal" data-target="#{{ post.post_modal_target }}">
-                            <img src="{{ post.post_picture.url }}" alt="">
-                        </figure>
+
+                        <div class="grid-item" data-toggle="modal" data-target="#{{ post.post_modal_target }}">
+                            <img class="img-thumbnail" src="{{ post.post_picture.url }}" alt="">
+                        </div>
+
                     {% endfor %}
+                    {% for post in posts %}
+                        <div class="portfolio-modal modal fade infinite-item" id="{{ post.post_modal_target }}" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+                            <div class="modal-dialog modal-xl" role="document">
+                                <div class="modal-content">
 
-                {% for post in posts %}
-                    <div class="portfolio-modal modal fade infinite-item" id="{{ post.post_modal_target }}" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
-                        <div class="modal-dialog modal-xl" role="document">
-                            <div class="modal-content">
 
-
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">
                                     <i class="fas fa-times"></i>
                                   </span>
-                                </button>
-                                <div class="modal-body text-center">
-                                    <div class="container">
-                                        <div class="row justify-content-center">
-                                            <div class="col-lg-8">
-                                                <!-- Portfolio Modal - Title -->
-                                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Picture</h2>
-                                                <!-- Icon Divider -->
-                                                <div class="divider-custom">
-                                                    <div class="divider-custom-line"></div>
-                                                    <div class="divider-custom-icon">
-                                                        <i class="fas fa-star"></i>
+                                    </button>
+                                    <div class="modal-body text-center">
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <div class="col-lg-8">
+                                                    <!-- Portfolio Modal - Title -->
+                                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Picture</h2>
+                                                    <!-- Icon Divider -->
+                                                    <div class="divider-custom">
+                                                        <div class="divider-custom-line"></div>
+                                                        <div class="divider-custom-icon">
+                                                            <i class="fas fa-star"></i>
+                                                        </div>
+                                                        <div class="divider-custom-line"></div>
                                                     </div>
-                                                    <div class="divider-custom-line"></div>
+                                                    <!-- Portfolio Modal - Image -->
+                                                    <img class="img-fluid rounded mb-5" src="{{ post.post_picture.url }}" alt="">
+                                                    <!-- Portfolio Modal - Text -->
+                                                    <div class="divider-custom-icon">
+                                                        {% if request.user in post.post_likes.all %}
+                                                            <a class="fas fa-heart fa-2x like" style="color: Tomato" name="{{ post.id }}"></a>
+                                                        {% else %}
+                                                            <a class="far fa-heart fa-2x like" style="color: Tomato" name="{{ post.id }}"></a>
+                                                        {% endif %}
+                                                        <p id="count-{{ post.id }}">좋아요 {{ post.like_count }}개</p>
+                                                    </div>
+                                                    <button class="btn btn-primary" href="#" data-dismiss="modal">
+                                                        <i class="fas fa-times fa-fw"></i>
+                                                        Close Window
+                                                    </button>
                                                 </div>
-                                                <!-- Portfolio Modal - Image -->
-                                                <img class="img-fluid rounded mb-5" src="{{ post.post_picture.url }}" alt="">
-                                                <!-- Portfolio Modal - Text -->
-                                                <div class="divider-custom-icon">
-                                                    {% if request.user in post.post_likes.all %}
-                                                        <a class="fas fa-heart fa-2x like" style="color: Tomato" name="{{ post.id }}"></a>
-                                                    {% else %}
-                                                        <a class="far fa-heart fa-2x like" style="color: Tomato" name="{{ post.id }}"></a>
-                                                    {% endif %}
-                                                    <p id="count-{{ post.id }}">좋아요 {{ post.like_count }}개</p>
-                                                </div>
-                                                <button class="btn btn-primary" href="#" data-dismiss="modal">
-                                                    <i class="fas fa-times fa-fw"></i>
-                                                    Close Window
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    </div>
-                {% endfor %}
-        </div>
-        <div>
-            {% if posts.has_next %}
-                <a class="infinite-more-link" href="?page={{ posts.next_page_number }}"></a>
-            {% endif %}
-            <div class="d-flex justify-content-center" style="display: none;">
-                <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading....</span>
-                </div>
+                        </div>
+                    {% endfor %}
+            </div>
 
+
+            {% if posts.has_next %}
+                <a class="next infinite-more-link" href="?page={{ posts.next_page_number }}"></a>
+            {% endif %}
+            <div class="page-load-status">
+                <div class="loader-ellips infinite-scroll-request">
+                    <span class="loader-ellips__dot"></span>
+                    <span class="loader-ellips__dot"></span>
+                    <span class="loader-ellips__dot"></span>
+                    <span class="loader-ellips__dot"></span>
+                </div>
             </div>
         </div>
     </section>
 
 
 
+
     <script src="{% static 'js/jquery.waypoints.js' %}"></script>
     <script src="{% static 'js/infinite.js' %}"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
+    <script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
+
+    <script type="text/javascript">
+
+        var $grid = $('.grid').masonry({
+            itemSelector: 'none', // select none at first
+            columnWidth: '.grid-sizer',
+            gutter: 5,
+            percentPosition: true,
+            // nicer reveal transition
+        });
+
+        // get Masonry instance
+        var msnry = $grid.data('masonry');
+
+        // initial items reveal
+        $grid.imagesLoaded( function() {
+
+            $grid.masonry( 'option', { itemSelector: '.grid-item' });
+            var $items = $grid.find('.grid-item');
+            $grid.masonry( 'appended', $items );
+        });
+
+
+        // init Infinte Scroll
+
+        $grid.infiniteScroll({
+            path: '.next',
+            append: '.grid-item',
+            outlayer: msnry,
+            status: '.page-load-status',
+        });
+
+    </script>
+
+
     <script>
         var infinite = new Waypoint.Infinite({
-            element: $('.infinite-container')[0],
-            handler: function (direction){
-            },
-            offset: 'bottom-in-view',
-
-            onBeforePageLoad: function(){
-                $('.spinner-border').show();
-            },
-            onAfterPageLoad: function(){
-                $('.spinner-border').hide();
-            }
+            element: $('.infinite-container')[0]
         });
     </script>
+
+
     <script type="text/javascript">
         $(".like").click(function(){
             var pk = $(this).attr('name')
