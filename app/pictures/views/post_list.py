@@ -11,6 +11,7 @@ def post_list(request):
     paginator = Paginator(posts_list, 21)
 
     page = request.GET.get('page')
+    pageposts = paginator.get_page(page)
 
     try:
         posts = paginator.page(page)
