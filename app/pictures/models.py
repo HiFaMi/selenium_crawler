@@ -24,3 +24,11 @@ class PostPicture(models.Model):
         s3.delete_object(Bucket='selenium-crawler', Key=f'.media/{self.post_picture}')
         print(f"{str(self.post_picture).split('/')[-1]} deleted")
         super().delete(*args, **kwargs)
+
+    @property
+    def get_previous_post(self):
+        return PostPicture.objects.filter(pk__lt=self.pk).order_by('-pk').first()
+
+    @property
+    def get_next_post(self):
+        return PostPicture.objects.filter(pk__gt=self.pk).first()
