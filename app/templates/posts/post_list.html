@@ -37,7 +37,7 @@
                     {% for post in posts %}
 
                         <div class="grid-item" data-toggle="modal" data-target="#{{ post.post_modal_target }}">
-                            <img class="img-thumbnail" src="{{ post.post_picture.url }}" alt="">
+                            <img id="img{{ post.pk }}" class="img-thumbnail" src="{{ post.post_picture.url }}" alt="">
                         </div>
 
                     {% endfor %}
@@ -69,22 +69,20 @@
                                                         <div class="divider-custom-line"></div>
                                                     </div>
                                                     <!-- Portfolio Modal - Image -->
-                                                    
-                                                    <div>
 
+                                                    <div>
+                                                        <img class="img-fluid rounded mb-5" src="{{ post.post_picture.url }}" alt="">
                                                         {% if post.get_next_post %}
-                                                        <a href="#{{ post.get_next_post.post_modal_target }}" data-toggle="modal" data-dismiss="modal">
-                                                            <i class="fas fa-chevron-left fa-5x" ></i>
-                                                        </a>
+                                                            <a class="float-left" href="#{{ post.get_next_post.post_modal_target }}" onclick="change_position({{ post.get_next_post.pk }})" data-toggle="modal" data-dismiss="modal">
+                                                                <i class="fas fa-chevron-left fa-5x " ></i>
+                                                            </a>
                                                         {% endif %}
 
                                                         {% if post.get_previous_post %}
-                                                        <a href="#{{ post.get_previous_post.post_modal_target }}" data-toggle='modal' data-dismiss="modal">
-                                                            <i class="fas fa-chevron-right fa-5x"></i>
-                                                        </a>
+                                                            <a class="float-right" href="#{{ post.get_previous_post.post_modal_target }}" onclick="change_position({{ post.get_previous_post.pk }})" data-toggle='modal' data-dismiss="modal">
+                                                                <i class="fas fa-chevron-right fa-5x" ></i>
+                                                            </a>
                                                         {% endif %}
-
-                                                        <img class="img-fluid rounded mb-5" src="{{ post.post_picture.url }}" alt="">
                                                     </div>
                                                     <!-- Portfolio Modal - Text -->
                                                     <div class="divider-custom-icon">
@@ -133,6 +131,15 @@
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 
     <script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
+
+    <script type="text/javascript">
+        function change_position(n){
+            $('html, body').stop().animate({
+                scrollTop:$('#img'+n).offset().top
+            });
+            $('.modal').css('overflow-y', 'auto');
+        }
+    </script>
 
     <script type="text/javascript">
 
