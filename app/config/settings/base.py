@@ -90,6 +90,9 @@ LOGOUT_REDIRECT_URL = "/"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USER_MODEL_EMAIL_FIELD = 'user_email'
 
+ACCOUNT_ADAPTER = 'config.allauth_adapter.AccountAdapter'
+
+
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 100,
@@ -126,6 +129,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             TEMPLATES_DIR,
+            os.path.join('BASE_DIR', 'templates', 'socialaccount'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
