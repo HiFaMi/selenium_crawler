@@ -70,18 +70,18 @@ build-backend = "poetry.masonry.api"
 #### Dockerfile 사용
 
 #### 환경
-production = `AWS EC2`
+- production = `AWS EC2`
 
 #### Database
-local = `sqlite`
-production = `AWS RDS postgresql`
+- local = `sqlite`
+- production = `AWS RDS postgresql`
 
 #### storage
-local = `local static, media folder`
-production = `AWS S3`
+- local = `local static, media folder`
+- production = `AWS S3`
 
 #### secret
-local, production = `local secret file` and `AWS SECRET MANAGER`
+- local, production = `local secret file` and `AWS SECRET MANAGER`
 
 ### Site url
 <!--### Site url-->
