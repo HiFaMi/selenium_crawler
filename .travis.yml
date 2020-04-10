@@ -20,7 +20,7 @@ before_script:
 
 script:
 - cd app
-- "./manage.py test"
+- coverage run manage.py test
 
 after_success:
 - coveralls
