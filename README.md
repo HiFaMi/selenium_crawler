@@ -1,5 +1,7 @@
 # Selenium Crawler Project
 
+[![Coverage Status](https://coveralls.io/repos/github/HiFaMi/selenium_crawler/badge.svg?branch=master)](https://coveralls.io/github/HiFaMi/selenium_crawler?branch=master)
+
 selenium으로 crawling한 데이터를 django model에 맞게 class화 하여
 최신순으로 보여준다.
 
