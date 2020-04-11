@@ -3,7 +3,7 @@ from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ..serializers.signup import SignupSerializer
+from ..serializers.signup import SignupSerializer, SignupGenericSerializer
 
 User = get_user_model()
 
@@ -25,7 +25,7 @@ class ApiSignUp(APIView):
 
 
 class SignUpGeneric(generics.CreateAPIView):
-    serializer_class = SignupSerializer
+    serializer_class = SignupGenericSerializer
 
     def perform_create(self, serializer):
         instance = serializer.save()
