@@ -25,3 +25,26 @@ class LoginTest(TestCase):
                                })
 
         self.assertEqual(response.status_code, 200)
+
+    def test_login_false_username(self):
+        User.objects.create_user(
+            username='test',
+            user_email='test@gmail.com',
+            password='testpassword'
+        )
+
+        client = Client()
+
+        response = client.post(reverse('members-api:api-login'),
+                               data={
+                                   'username': 'testfalse',
+                                   'password': 'testpassword'
+                               })
+
+        serializer = UserAuthSerializer(data={
+            'username': 'testfalse',
+            'password': 'testpassword'
+        })
+
+        self.assertEqual(serializer.is_valid(), False)
+        self.assertEqual(response.status_code, 400)
