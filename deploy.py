@@ -80,15 +80,13 @@ def build_base():
 
 
 def build_maker():
-    try:
-        subprocess.call('poetry export -f requirements.txt > requirements.txt', shell=True)
-        subprocess.call("{} sudo rm -rf project".format(AWS_CONNECT), shell=True)
-        subprocess.call("rsync -avL --progress --exclude='.media' -e '{}' ~/project/poetry_test {}:".format(AWS_CONNECT_PEM, AWS_URL_CONNECT), shell=True)
-        subprocess.call("{} sudo mv /home/ubuntu/poetry_test /home/ubuntu/project".format(AWS_CONNECT), shell=True)
-        print('Rename to project')
 
-    finally:
-        os.remove('requirements.txt')
+    subprocess.call('poetry export -f requirements.txt > requirements.txt', shell=True)
+    subprocess.call("{} sudo rm -rf project".format(AWS_CONNECT), shell=True)
+    subprocess.call("rsync -avL --progress --exclude='.media' -e '{}' ~/project/poetry_test {}:".format(AWS_CONNECT_PEM, AWS_URL_CONNECT), shell=True)
+    subprocess.call("{} sudo mv /home/ubuntu/poetry_test /home/ubuntu/project".format(AWS_CONNECT), shell=True)
+    print('Rename to project')
+
 
 
 def build_selenium():
