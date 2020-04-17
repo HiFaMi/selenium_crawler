@@ -21,6 +21,7 @@ django-allauth = "^0.41.0"
 [tool.poetry.dev-dependencies]
 django-extensions = "^2.2.8"
 jupyter = "^1.0.0"
+coverage = "^5.0.4"
 
 [build-system]
 requires = ["poetry>=0.12"]
