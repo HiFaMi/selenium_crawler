@@ -17,6 +17,8 @@ branches:
 
 before_script:
 - "export DJANGO_SETTINGS_MODULE=config.settings.dev"
+- pip install -r requirements-dev.txt
+
 
 script:
 - cd app
