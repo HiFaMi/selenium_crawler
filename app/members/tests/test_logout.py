@@ -26,3 +26,10 @@ class LogoutTest(TestCase):
 
         self.assertEqual(response.status_code, 204)
         self.assertEqual(response.data, {'alter': "로그아웃 되셨습니다."})
+
+    def test_logout_fail(self):
+        client = APIClient()
+
+        response = client.post(reverse('members-api:api-logout'))
+
+        self.assertEqual(response.status_code, 401)
