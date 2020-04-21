@@ -1,5 +1,14 @@
 from django.contrib import admin
+from django.contrib.auth import get_user_model
+from suit.admin import SortableModelAdmin
 
-from .models.auth import User
+User = get_user_model()
 
-admin.site.register(User)
+
+class UserAdmin(SortableModelAdmin):
+    list_display = ['username', 'user_email', 'is_superuser', 'order']
+    list_editable = ('order',)
+    sortable = 'order'
+
+
+admin.site.register(User, UserAdmin)

@@ -248,6 +248,14 @@ sftp = ["paramiko"]
 
 [[package]]
 category = "main"
+description = "Modern theme for Django admin interface."
+name = "django-suit"
+optional = false
+python-versions = "*"
+version = "0.2.28"
+
+[[package]]
+category = "main"
 description = "Web APIs for Django, made easy."
 name = "djangorestframework"
 optional = false
@@ -1091,7 +1099,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools"]
 
 [metadata]
-content-hash = "b9871c1cc51d9360cc8ac201d9248ed6e1d22fb1ce94089f668f1d6ee1366308"
+content-hash = "6c190785a2d20809d94735b281388879f37067c656b420826a5d0b4b2865f654"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -1203,6 +1211,10 @@ django-secrets-manager = [
 django-storages = [
     {file = "django-storages-1.9.1.tar.gz", hash = "sha256:a59e9923cbce7068792f75344ed7727021ee4ac20f227cf17297d0d03d141e91"},
     {file = "django_storages-1.9.1-py2.py3-none-any.whl", hash = "sha256:3103991c2ee8cef8a2ff096709973ffe7106183d211a79f22cf855f33533d924"},
+]
+django-suit = [
+    {file = "django-suit-0.2.28.tar.gz", hash = "sha256:bacd8a079fcc08deb6efd0d7f60241e3c319526939ae1abe8ccfbc1b03e97104"},
+    {file = "django_suit-0.2.28-py2.py3-none-any.whl", hash = "sha256:256412597ac8e9461780542eebb12b37f65ff702bf23de23d07d245510c64ff2"},
 ]
 djangorestframework = [
     {file = "djangorestframework-3.11.0-py3-none-any.whl", hash = "sha256:05809fc66e1c997fd9a32ea5730d9f4ba28b109b9da71fccfa5ff241201fd0a4"},
