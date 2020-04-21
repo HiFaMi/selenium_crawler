@@ -54,6 +54,7 @@ LOGIN_URL = 'members:login'
 # Application definition
 
 INSTALLED_APPS = [
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
