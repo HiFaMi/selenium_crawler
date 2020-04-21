@@ -8,8 +8,8 @@ before_install:
 - tar xvf secrets.tar
 
 install:
-- pip install -r requirements.txt
 - pip install coveralls
+- pip install -r requirements.txt
 
 branches:
   only:
