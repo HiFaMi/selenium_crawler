@@ -112,6 +112,19 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+# django admin suit
+
+SUIT_CONFIG = {
+    # 'MENU': (
+    #     {'app': 'members', 'label': 'pby user'},
+    # ),
+    'MENU_OPEN_FIRST_CHILD': False,
+    'MENU_ICONS': {
+        'members': 'icon-user',
+        'pictures': 'icon-camera',
+    }
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
